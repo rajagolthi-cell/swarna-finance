@@ -1,0 +1,15 @@
+
+{
+  "name": "swarna-finance",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:remote": "wrangler d1 migrations apply swarna-finance-db --remote",
+    "db:local": "wrangler d1 migrations apply swarna-finance-db --local"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
