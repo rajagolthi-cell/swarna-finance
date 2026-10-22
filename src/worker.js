@@ -69,7 +69,7 @@ async function pbk(secret,salt) {
   const hash=await crypto.subtle.deriveBits({
     name:"PBKDF2",
     salt:bytes,
-    iterations:180000,
+    iterations:100000,
     hash:"SHA-256"
   },key,256);
 
