@@ -13,8 +13,8 @@
     "crons": ["*/15 * * * *"]
   },
   "vars": {
-    "GOOGLE_REDIRECT_URI": "https://REPLACE-YOUR-WORKER.workers.dev/api/drive/callback",
-    "RESEND_FROM": "Swarna Finance <otp@YOUR-VERIFIED-DOMAIN.COM>"
+    "GOOGLE_REDIRECT_URI": "https://swarnalive.com/api/drive/callback",
+    "RESEND_FROM": "Swarna Finance <otp@swarnalive.com>
   },
   "d1_databases": [
     {
