@@ -20,7 +20,7 @@
     {
       "binding": "DB",
       "database_name": "swarna-finance-db",
-      "database_id": "REPLACE_WITH_D1_ID"
+      "database_id": "e4a10973-3579-4d8a-8188-a67da217d7bb"
     }
   ],
   "r2_buckets": [
