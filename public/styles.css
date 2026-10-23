@@ -300,6 +300,8 @@ img {
   color: var(--gold);
 }
 
+}
+
 
 /* =====================================================
    05. FORM INPUTS
@@ -598,6 +600,7 @@ img {
   color: #7e9786;
 
   font-weight: 750;
+
 }
 
 .segment button.on {
@@ -898,6 +901,7 @@ img {
 }
 
 .navigation button:hover:not(.active) {
+
   background: rgba(255, 255, 255, 0.08);
 }
 
@@ -1506,6 +1510,7 @@ img {
 
   font-size: 11px;
   line-height: 1.5;
+
 }
 
 
@@ -1798,6 +1803,7 @@ img {
   margin-top: 8px;
 
   color: #a04d42;
+
 }
 
 #removePhoto:hover {
@@ -2098,6 +2104,7 @@ img {
   color: var(--ink);
 
   font-size: 12px;
+
   font-weight: 750;
 }
 
@@ -2698,6 +2705,7 @@ img {
 }
 
 .review-lines > div {
+
   padding: 11px 0;
   border-bottom: 1px solid #e8ede7;
 }
@@ -2998,6 +3006,7 @@ img {
 
   padding:
     7px 8px
+
     calc(7px + env(safe-area-inset-bottom));
 
   background: var(--forest);
@@ -3297,6 +3306,7 @@ img {
   .topbar-right {
     gap: 8px;
   }
+
 
   .date-pill {
     display: none;
@@ -3598,6 +3608,7 @@ textarea:focus-visible {
 
 /* ============================================
    SWARNA FINANCE — SLIM LUXURY SIDEBAR
+
    Paste at the END of public/styles.css
 ============================================ */
 
@@ -3812,4 +3823,3 @@ textarea:focus-visible {
     display: none;
   }
 }
-
