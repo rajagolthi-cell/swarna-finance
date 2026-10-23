@@ -247,7 +247,8 @@ $("otpCancel").onclick = async () => {
   view("auth");
 };
 
-// OWNER PIN
+
+ // OWNER PIN
 
 $("setupForm").onsubmit = async event => {
   event.preventDefault();
@@ -467,7 +468,8 @@ async function loadSummary() {
 
 $("refreshHome").onclick = loadSummary;
 
-// FINANCE CALCULATION
+
+ // FINANCE CALCULATION
 
 function calc() {
   const weight = Number($("weight").value) || 0;
@@ -710,6 +712,7 @@ $("proceed").onclick = () => {
   modal("confirmModal");
 };
 
+
 $("saveOrder").onclick = async () => {
   if (!$("customerAccepted").checked) {
     return toast("Confirm customer acceptance.");
@@ -933,6 +936,43 @@ $("staffList").onclick = async event => {
   }
 };
 
+ // OWNER GOOGLE DRIVE FOLDER LINK CONTROL
+function installDriveFolderInput() {
+  const anchor=$("driveFolder");
+  if(!anchor || document.getElementById("customDriveFolderForm")) return;
+  const form=document.createElement("form");
+  form.id="customDriveFolderForm";
+  form.style.cssText="margin-top:18px;display:grid;gap:10px";
+  const label=document.createElement("label");
+  label.htmlFor="customDriveFolderURL";
+  label.textContent="YOUR GOOGLE DRIVE FOLDER LINK";
+  const input=document.createElement("input");
+  input.id="customDriveFolderURL";
+  input.type="url";
+  input.required=true;
+  input.placeholder="https://drive.google.com/drive/folders/...";
+  input.style.cssText="width:100%;box-sizing:border-box;padding:14px;border:1px solid #ddd;border-radius:10px";
+  const button=document.createElement("button");
+  button.type="submit";
+  button.className="btn primary";
+  button.textContent="Save Drive Folder Link";
+  const note=document.createElement("small");
+  note.textContent="Connect your Google account first. New order backups will use this folder; existing backups will stay where they are.";
+  form.append(label,input,button,note);
+  anchor.insertAdjacentElement("afterend",form);
+  form.onsubmit=async event=>{
+    event.preventDefault();
+    busy(button,true);
+    try {
+      await post("/drive/folder",{url:input.value.trim()});
+      toast("Drive backup folder saved. New backups will use this folder.");
+      await driveStatus();
+    } catch(err) { toast(err.message); }
+    finally { busy(button,false); }
+  };
+}
+installDriveFolderInput();
+
 // GOOGLE DRIVE
 
 async function driveStatus() {
@@ -956,6 +996,7 @@ async function driveStatus() {
     $("driveFolder").replaceChildren();
 
     if (result.folder_url) {
+      $("customDriveFolderURL").value = result.folder_url;
       const link = document.createElement("a");
       link.href = result.folder_url;
       link.target = "_blank";
@@ -1078,6 +1119,7 @@ $("unlinkSheets").onclick = async () => {
     toast(err.message);
   }
 };
+
 
 // RECEIPT AND LABEL PRINTERS
 
@@ -1261,7 +1303,7 @@ $("detailPrintReceipt").onclick = () =>
 $("detailPrintLabel").onclick = () =>
   printOrder("label", state.orderInDetails);
 
-// CLOSE MODALS
+ // CLOSE MODALS
 
 document.querySelectorAll("[data-close]").forEach(button => {
   button.onclick = () => modal(button.dataset.close, false);
@@ -1291,3 +1333,4 @@ refreshSession().catch(err => {
   view("auth");
   toast(err.message);
 });
+
