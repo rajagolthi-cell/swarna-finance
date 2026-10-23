@@ -414,7 +414,7 @@ async function decrypt(env,value) {
   return new TextDecoder().decode(decrypted);
 }
 
-// GOOGLE OAUTH
+ // GOOGLE OAUTH
 
 async function tokenResponse(data) {
   const response=await fetch("https://oauth2.googleapis.com/token",{
@@ -526,7 +526,7 @@ async function driveUpload(access,folder,name,content,mime) {
   return result.id;
 }
 
-// DRIVE ORDER BACKUP
+ // DRIVE ORDER BACKUP
 
 async function syncOne(env,ownerId,orderId) {
   const claim=await env.DB.prepare(`
@@ -829,7 +829,7 @@ async function syncSheetOne(env,ownerId,orderId) {
   }
 }
 
-// MAIN API ROUTER
+ // MAIN API ROUTER
 
 async function handler(req,env,ctx) {
   if(
@@ -1426,6 +1426,7 @@ async function handler(req,env,ctx) {
     });
   }
 
+
   // CREATE NEW GOLD FINANCE ORDER
   if(path==="/api/orders" && method==="POST") {
     requireStaff(s);
@@ -1658,6 +1659,37 @@ async function handler(req,env,ctx) {
     });
   }
 
+  // OWNER-SELECTED GOOGLE DRIVE FOLDER
+  if(path==="/api/drive/folder" && method==="POST") {
+    requireOwner(s);
+    const v=await parse(req);
+    const input=txt(v.url,1200);
+    let parsed;
+    try { parsed=new URL(input); } catch { throw bad("Invalid Google Drive folder link"); }
+    if(parsed.protocol!=="https:" || parsed.hostname!=="drive.google.com") {
+      throw bad("Use a Google Drive folder URL");
+    }
+    const match=parsed.pathname.match(/^\/drive\/(?:u\/\d+\/)?folders\/([A-Za-z0-9_-]{10,})\/?$/);
+    if(!match) throw bad("Paste a Google Drive folder link ending in /folders/FOLDER_ID");
+    const folderId=match[1];
+    const {access}=await googleAccess(env,s.owner_id);
+    const response=await fetch(
+      "https://www.googleapis.com/drive/v3/files/"+encodeURIComponent(folderId)+
+      "?fields=id,mimeType,capabilities(canAddChildren)&supportsAllDrives=true",
+      {headers:{Authorization:"Bearer "+access}}
+    );
+    if(!response.ok) throw bad("Google cannot access this folder. Authorize it for the app or use its existing Swarna Finance folder.",403);
+    const folder=await response.json();
+    if(folder.mimeType!=="application/vnd.google-apps.folder" || !folder.capabilities?.canAddChildren) {
+      throw bad("This account cannot upload to the selected folder",403);
+    }
+    await env.DB.prepare("UPDATE drive_accounts SET folder_id=? WHERE owner_id=?")
+      .bind(folderId,s.owner_id).run();
+    // Previously synced files remain in their original folder. New backups use the selected folder.
+    return reply({ok:true,folder_url:"https://drive.google.com/drive/folders/"+folderId});
+  }
+
+
   // GOOGLE CONNECT
   if(path==="/api/drive/connect" && method==="GET") {
     requireOwner(s);
@@ -1815,6 +1847,7 @@ async function handler(req,env,ctx) {
         rows.results.length+" attempted orders."
     });
   }
+
 
   // GOOGLE SHEETS STATUS
   if(path==="/api/sheets/status" && method==="GET") {
