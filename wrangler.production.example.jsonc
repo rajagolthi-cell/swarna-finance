@@ -1,0 +1,42 @@
+// Reference ONLY: never deploy to production without inspecting live bindings, migration state, and backups.
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "swarna-finance",
+  "main": "./src/worker.js",
+  "compatibility_date": "2026-10-23",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "swarna-finance-db",
+      "database_id": "REPLACE_WITH_EXISTING_LIVE_D1_UUID",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "PHOTOS",
+      "bucket_name": "swarna-finance-private-photos"
+    }
+  ],
+  "vars": {
+    "RESEND_FROM": "Swarna Finance <otp@swarnalive.com>",
+    "MASTER_EMAIL": "REPLACE_WITH_MASTER_ADMIN_EMAIL",
+    "GOOGLE_REDIRECT_URI": "https://swarnalive.com/api/drive/callback",
+    "PUBLIC_ORIGIN": "https://swarnalive.com",
+    "ADMIN_HOSTNAME": "admin.swarnalive.com"
+  },
+  "triggers": {
+    "crons": [
+      "*/15 * * * *"
+    ]
+  },
+  "observability": {
+    "enabled": true
+  }
+}

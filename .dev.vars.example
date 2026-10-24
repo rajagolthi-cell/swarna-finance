@@ -1,0 +1,9 @@
+# Copy to .dev.vars ONLY for local development; never commit actual values.
+# Generate two distinct random values: node scripts/create-peppers.mjs
+PIN_PEPPER=REPLACE_WITH_64_CHAR_RANDOM_HEX
+OTP_PEPPER=REPLACE_WITH_DIFFERENT_64_CHAR_RANDOM_HEX
+RESEND_API_KEY=REPLACE_WITH_PRIVATE_RESEND_API_KEY
+# Optional Google Drive/Sheets integration:
+# TOKEN_ENCRYPTION_KEY=REPLACE_WITH_BASE64_OR_IMPLEMENTATION_REQUIRED_FORMAT
+# GOOGLE_CLIENT_ID=REPLACE_ME
+# GOOGLE_CLIENT_SECRET=REPLACE_ME

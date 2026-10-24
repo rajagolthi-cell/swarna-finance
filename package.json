@@ -1,0 +1,19 @@
+{
+  "name": "swarna-finance-complete-repository",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:dry-run": "wrangler deploy --dry-run",
+    "check": "node --check src/worker.js && node --check src/onboarding.js && node --check public/app.js && node --check public/platform.js && node --check scripts/test-worker.mjs && node --check scripts/verify-site.mjs && node --check scripts/create-peppers.mjs",
+    "test": "node scripts/test-worker.mjs && python3 scripts/test-schema.py",
+    "verify:site": "node scripts/verify-site.mjs",
+    "db:local": "wrangler d1 migrations apply swarna-finance-complete-staging-db --local",
+    "db:remote": "wrangler d1 migrations apply swarna-finance-complete-staging-db --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^4.40.0"
+  }
+}

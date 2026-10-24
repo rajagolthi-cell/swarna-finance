@@ -1,0 +1,15 @@
+node_modules/
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.env
+.env.*
+!.env.example
+.DS_Store
+*.log
+*-backup.sql
+*database-backup.sql
+*.sqlite
+*.db
+private-exports/
