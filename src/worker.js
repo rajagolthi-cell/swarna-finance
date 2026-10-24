@@ -2066,7 +2066,7 @@ export default {
         if(path==='/' || path==='/index.html') {
           return env.ASSETS.fetch(new Request(new URL('/admin.html',req.url),req));
         }
-        if(!['/admin.html','/platform.js','/platform.css'].includes(path)) {
+        if(!['/admin.html','/platform.js','/platform.css','/luxury-platform.css','/reference-design.css'].includes(path)) {
           return new Response('Not found',{status:404});
         }
       }
