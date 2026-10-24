@@ -1,9 +1,0 @@
-CREATE TABLE IF NOT EXISTS business_applications(id TEXT PRIMARY KEY,owner_name TEXT NOT NULL,email TEXT NOT NULL,phone TEXT NOT NULL,business_name TEXT NOT NULL,business_type TEXT NOT NULL,address TEXT NOT NULL,city TEXT NOT NULL,state TEXT NOT NULL,pincode TEXT NOT NULL,gstin TEXT,notes TEXT,status TEXT NOT NULL DEFAULT 'pending',submitted_at INTEGER NOT NULL,reviewed_at INTEGER,reviewed_by TEXT,review_notes TEXT,owner_id TEXT);
-CREATE INDEX IF NOT EXISTS idx_business_applications_status ON business_applications(status,submitted_at);
-CREATE TABLE IF NOT EXISTS account_recovery_challenges(id TEXT PRIMARY KEY,owner_id TEXT NOT NULL,code_hash TEXT NOT NULL,purpose TEXT NOT NULL,expires_at INTEGER NOT NULL,attempts INTEGER NOT NULL DEFAULT 0,created_at INTEGER NOT NULL,consumed_at INTEGER);
-CREATE TABLE IF NOT EXISTS master_admin_challenges(id TEXT PRIMARY KEY,email TEXT NOT NULL,code_hash TEXT NOT NULL,expires_at INTEGER NOT NULL,attempts INTEGER NOT NULL DEFAULT 0,created_at INTEGER NOT NULL,consumed_at INTEGER);
-CREATE TABLE IF NOT EXISTS master_admin_sessions(token_hash TEXT PRIMARY KEY,email TEXT NOT NULL,expires_at INTEGER NOT NULL,created_at INTEGER NOT NULL);
-CREATE TABLE IF NOT EXISTS platform_audit_log(id TEXT PRIMARY KEY,actor_email TEXT NOT NULL,action TEXT NOT NULL,target_id TEXT,details TEXT,created_at INTEGER NOT NULL);
-CREATE TABLE IF NOT EXISTS platform_rate_limits(id TEXT PRIMARY KEY,scope TEXT NOT NULL,created_at INTEGER NOT NULL);
-CREATE INDEX IF NOT EXISTS idx_platform_rate ON platform_rate_limits(scope,created_at);
-CREATE TABLE IF NOT EXISTS email_change_requests(id TEXT PRIMARY KEY,owner_id TEXT NOT NULL,old_email TEXT NOT NULL,new_email TEXT NOT NULL,code_hash TEXT NOT NULL,expires_at INTEGER NOT NULL,attempts INTEGER NOT NULL DEFAULT 0,requested_by TEXT NOT NULL,created_at INTEGER NOT NULL,consumed_at INTEGER);
