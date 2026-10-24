@@ -1,0 +1,25 @@
+/* Swarna Finance: final restrained ivory / champagne / emerald polish */
+:root{--sf-forest:#093e34;--sf-gold:#ac7d3c;--sf-cream:#faf7f1;--sf-border:#eae4da}
+html{scroll-behavior:smooth}body{background:#faf7f1}button,input,select,textarea{font:inherit}
+button,a{transition:background-color .18s ease,box-shadow .18s ease,transform .18s ease}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #b89559;outline-offset:2px}
+.sf-header{background:#fffcf7;border-bottom:1px solid #eee7dd;box-shadow:0 2px 14px #2c27130a}
+.sf-hero{background:#f6eee3}.sf-hero-copy{background:linear-gradient(120deg,#fbf6ee,#f2e7d8)}
+.sf-hero-image{background-image:url('/assets/hero-jewellery.jpg')!important;background-size:cover!important;background-position:center!important;min-height:520px}
+.sf-brand,.sf-intro h2,.sf-bottom h2{color:#23251f}
+.sf-steps article{box-shadow:0 7px 24px #5e4c290b}.sf-button{font-weight:600}.sf-gold{background:#a77734}
+.sf-perks b{color:#a77734}.sf-footer{background:#093e34}
+.auth-shell{background:#faf7f1!important}.auth-art{background-image:url('/assets/login-jewellery.jpg')!important;background-size:cover!important;background-position:center!important}
+.auth-form-wrap{background:#faf7f1!important}.auth-inner{background:#fffefa!important;box-shadow:0 12px 36px #46381b10!important}
+.dashboard,.workspace-main{background:#faf7f1!important}.sidebar{background:#093e34!important}
+.topbar{background:#fffcf8!important;border-bottom:1px solid #eee8dd!important}
+.page-content{background:#faf7f1!important}.kpi,.panel,.surface,.section-card,.settings-panel,.summary-card{background:#fffefa!important;border-color:#eae5dc!important;box-shadow:0 5px 20px #594d2e09!important}
+.kpis{gap:14px}.kpi{border-radius:11px!important}.kpi strong{letter-spacing:-.02em}
+.navigation button{border-radius:7px!important}.navigation button.active{background:#25695a!important}
+.section-intro{background:#0a5446!important}.section-intro h2,.section-intro .overline{color:#fff!important}
+input,select,textarea{border-radius:7px!important;border-color:#ddd8ce!important;background:#fffefa!important}
+.btn.primary,.btn.gold{background:#093e34!important}.btn.primary:hover,.btn.gold:hover{background:#175e4f!important}
+.table-wrap{border-radius:10px;overflow:auto}.table-wrap th{background:#f6f1e9!important}
+body:has(#application) .wrap:before{background-image:linear-gradient(0deg,rgba(29,25,18,.4),transparent 55%),url('/assets/registration-jewellery.jpg')!important;background-position:center!important;background-size:cover!important}
+@media(max-width:850px){.sf-hero{grid-template-columns:1fr}.sf-hero-image{min-height:350px}.sf-hero-copy{padding:45px 7%}.sf-header{gap:12px}.sf-header nav{gap:12px}}
+@media(max-width:560px){.sf-hero h1{font-size:clamp(48px,13vw,64px)}.sf-perks{gap:10px}.sf-hero-image{min-height:290px}.sf-header-actions{gap:5px}.sf-header-actions .sf-button{padding:10px 9px}}
