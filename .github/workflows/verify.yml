@@ -1,0 +1,16 @@
+name: Verify Swarna Finance source
+on:
+  push:
+  pull_request:
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify JavaScript syntax
+        run: npm run check
+      - name: Run offline API and SQLite schema tests
+        run: npm test
